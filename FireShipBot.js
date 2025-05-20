@@ -17,27 +17,16 @@ const bot = new Client({
         const Update = async () =>{
             try {
                 const video = await getlatestVideo();
-                if(video != null){
-                    await channel.send(` Wake up 🔥fireship :${video}`);
+                if(video !== null)
+                {
+                    await channel.send(`@everyone fireship uploaded a 🔥 new video : ${video}`)
                 }
             } catch (error) {
                 console.log(error)
             }
         }
         Update();
-        setInterval(Update,6*60*60*1000);
+        setInterval(Update,1000*10);
 })
-
-bot.on('messageCreate', async message => {
-    if (message.author.bot) return;
-    if (message.channelId === Channel_id) {
-        try {
-            const video =await getlatestVideo();
-            await message.reply(`Here is the latest video of FireShip : ${video}`);
-        } catch (error) {
-            console.error('Error replying to message:', error);
-        }
-    }
-});
 
 bot.login(Discord_Token);
