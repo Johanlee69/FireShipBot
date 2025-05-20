@@ -1,8 +1,19 @@
 import { Client, GatewayIntentBits } from 'discord.js'
 import'dotenv/config'
+import express from 'express';
 import { getlatestVideo } from './FireShipAPI.js';
 const Discord_Token = process.env.DC_FIRESHIP_BOT_TOKEN;
 const Channel_id = process.env.DC_CHANNEL_ID;
+const port = process.env.PORT || 3000
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('server is running')
+})
+
+app.listen(port, () => {
+  console.log(`app listening on port ${port}`)
+})
 
 const bot = new Client({
     intents: [
@@ -26,7 +37,7 @@ const bot = new Client({
             }
         }
         Update();
-        setInterval(Update,1000*10);
+        setInterval(Update,1000*60);
 })
 
 bot.login(Discord_Token);
